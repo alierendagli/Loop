@@ -1,0 +1,30 @@
+name: Build Loop (No Team ID)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select --switch /Applications/Xcode.app
+
+      - name: Install dependencies
+        run: brew install carthage
+
+      - name: Resolve Swift package dependencies
+        run: xcodebuild -resolvePackageDependencies
+
+      - name: Build project
+        run: |
+          xcodebuild \
+            -scheme Loop \
+            -project Loop.xcodeproj \
+            -configuration Release \
+            SWIFT_COMPILATION_MODE=wholemodule \
+            SWIFT_OPTIMIZATION_LEVEL=-O \
+            CODE_SIGNING_ALLOWED=NO

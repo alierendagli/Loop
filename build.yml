@@ -1,0 +1,25 @@
+name: Build IPA
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install CocoaPods
+      run: sudo gem install cocoapods
+
+    - name: Install Pods
+      run: |
+        cd Loop
+        pod install
+
+    - name: Build IPA
+      run: |
+        cd Loop
+        xcodebuild -scheme Loop         -workspace Loop.xcworkspace         -sdk iphoneos         -configuration Release         archive -archivePath $PWD/build/Loop.xcarchive         CODE_SIGNING_ALLOWED=NO

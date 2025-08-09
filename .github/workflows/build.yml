@@ -2,6 +2,7 @@ name: Build Loop (No Team ID)
 
 on:
   workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   build:

@@ -1,0 +1,37 @@
+name: Build Loop IPA
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Xcode
+      run: sudo xcode-select -s /Applications/Xcode_16.app
+
+    - name: Install dependencies
+      run: |
+        brew install cocoapods
+        cd Loop
+        pod install
+
+    - name: Build IPA
+      run: |
+        cd Loop
+        xcodebuild           -scheme Loop           -workspace Loop.xcodeproj/project.xcworkspace           -sdk iphoneos           -configuration Release           archive           -archivePath $PWD/build/Loop.xcarchive           CODE_SIGNING_ALLOWED=NO
+
+    - name: Export IPA
+      run: |
+        cd Loop
+        xcodebuild           -exportArchive           -archivePath $PWD/build/Loop.xcarchive           -exportOptionsPlist ExportOptions.plist           -exportPath $PWD/build
+
+    - name: Upload IPA
+      uses: actions/upload-artifact@v4
+      with:
+        name: Loop.ipa
+        path: Loop/build/*.ipa

@@ -1,4 +1,4 @@
-		// !$*UTF8*$!
+				// !$*UTF8*$!
 {
 	archiveVersion = 1;
 	classes = {
@@ -5115,7 +5115,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = -Onone;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -5757,3 +5757,5 @@
 	};
 	rootObject = 43776F841B8022E90074EA36 /* Project object */;
 }
+
+RUN_SCRIPT_PHASE_DISABLE_DEPENDENCY_ANALYSIS = YES;

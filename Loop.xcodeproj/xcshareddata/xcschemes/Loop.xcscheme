@@ -94,7 +94,14 @@
             ReferencedContainer = "container:Loop.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-   </LaunchAction>
+   
+    <CommandLineArguments>
+        <CommandLineArgument
+            argument="-Xswiftc -Onone"
+            isEnabled="YES">
+        </CommandLineArgument>
+    </CommandLineArguments>
+</LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
